@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- 
+    Autor: Gabriel Amaral
+    Site: https://instagram.com/sougabrielamaral
+    Data/Hora: 08/05/2026 20:57:20
+    Versão: 1.0.0
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chá Revelação - Erika & Gabriel</title>
+    
+    <!-- SEO e Meta Tags -->
+    <meta name="description" content="Você é nosso convidado especial para o Chá Revelação de Erika & Gabriel. Confirme sua presença!">
+    <meta name="author" content="Gabriel Amaral">
+    <meta name="theme-color" content="#F7F3EE">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            /* Paleta de Cores Neutras */
+            --bg-color: #F7F3EE;
+            --surface-color: #EFE7DD;
+            --border-color: #D9CCBE;
+            --text-primary: #5C5148;
+            --text-secondary: #8A7D72;
+            --accent-gold: #C8AE8D;
+            --white-cream: #FDFAF7;
+            
+            /* Tipografia */
+            --font-title: 'Cormorant Garamond', serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            font-size: 16px;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Tipografia */
+        h1, h2, h3 {
+            font-family: var(--font-title);
+            font-weight: 600;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: clamp(48px, 8vw, 72px);
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: clamp(36px, 6vw, 48px);
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+        }
+
+        p {
+            color: var(--text-secondary);
+        }
+
+        /* Botões */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--accent-gold);
+            color: var(--white-cream);
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 16px;
+            padding: 12px 32px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            min-height: 44px;
+            min-width: 44px; /* Touch target acessível */
+        }
+
+        .btn:hover {
+            background-color: #B89A79;
+            box-shadow: 0 4px 12px rgba(92, 81, 72, 0.15);
+        }
+
+        .btn:focus-visible {
+            outline: 2px solid var(--accent-gold);
+            outline-offset: 4px;
+        }
+
+        /* Estrutura das Seções */
+        section {
+            padding: 100px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .divider {
+            width: 100%;
+            height: 1px;
+            background-color: var(--border-color);
+            margin: 0 auto;
+            position: relative;
+            max-width: 200px;
+        }
+
+        .divider::after {
+            content: '✧';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--bg-color);
+            padding: 0 10px;
+            color: var(--accent-gold);
+            font-family: var(--font-title);
+            font-size: 20px;
+        }
+
+        /* Seção 1 - Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(circle at center, var(--white-cream) 0%, var(--bg-color) 100%);
+            position: relative;
+            padding: 40px 20px;
+        }
+
+        .hero-logo {
+            color: var(--accent-gold);
+            margin-bottom: 2rem;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-title);
+            font-size: clamp(24px, 4vw, 32px);
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .hero-text {
+            max-width: 600px;
+            margin: 0 auto 3rem auto;
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .decorations {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .decorations svg {
+            position: absolute;
+            color: var(--accent-gold);
+            opacity: 0.4;
+        }
+
+        .hero > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Componente Card */
+        .card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 20px rgba(92, 81, 72, 0.05);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(92, 81, 72, 0.12);
+        }
+
+        /* Seção 2 - O Bebê */
+        .baby-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 2rem;
+        }
+
+        .baby-card .icon-wrapper {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px auto;
+            border-radius: 50%;
+            background-color: var(--white-cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-gold);
+            border: 1px solid var(--border-color);
+        }
+
+        .baby-card h3 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .baby-footer {
+            text-align: center;
+            font-style: italic;
+            font-family: var(--font-title);
+            font-size: 22px;
+        }
+
+        /* Animação Card Bebê */
+        .baby-card {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        section.visible .baby-card {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        section.visible .baby-card:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        /* Seção 3 - Detalhes do Evento */
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .detail-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 30px;
+            text-align: left;
+        }
+
+        .detail-card .icon {
+            color: var(--accent-gold);
+            flex-shrink: 0;
+        }
+
+        .detail-card h3 {
+            font-family: var(--font-body);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            text-align: left;
+        }
+
+        .detail-card p {
+            font-size: 18px;
+            color: var(--text-primary);
+            font-weight: 400;
+        }
+
+        .highlight-text {
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+
+        /* Seção 4 - Formulário */
+        .form-container {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 50px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 4px 20px rgba(92, 81, 72, 0.05);
+        }
+
+        .form-subtitle {
+            text-align: center;
+            margin-bottom: 30px;
+            font-style: italic;
+            font-family: var(--font-title);
+            font-size: 22px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            background-color: var(--white-cream);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 16px;
+            transition: all 0.3s ease;
+            min-height: 44px; /* Acessibilidade Mobile */
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 3px rgba(200, 174, 141, 0.2);
+        }
+
+        .chips-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .chip-label {
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 14px 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            background-color: var(--white-cream);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-height: 44px; /* Acessibilidade Mobile */
+        }
+
+        .chip-label:hover {
+            border-color: var(--accent-gold);
+        }
+
+        .chip-input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .chip-input:checked ~ .chip-content {
+            font-weight: 600;
+        }
+
+        .chip-label:has(.chip-input:checked) {
+            border-color: var(--accent-gold);
+            background-color: rgba(200, 174, 141, 0.1);
+        }
+
+        .chip-input:focus-visible ~ .chip-content::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border: 2px solid var(--accent-gold);
+            border-radius: 14px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(200, 174, 141, 0.1);
+            border: 1px solid var(--accent-gold);
+            border-radius: 12px;
+            margin-top: 20px;
+            color: var(--text-primary);
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Seção 5 - Rodapé */
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            font-family: var(--font-title);
+            font-size: 20px;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* Responsividade Tablets e Mobile */
+        @media (max-width: 768px) {
+            .baby-grid, .details-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            section {
+                padding: 60px 20px;
+            }
+
+            .form-container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="decorations" id="decorations">
+            <!-- Partículas injetadas via JS -->
+        </div>
+        
+        <div class="hero-logo">
+            <i data-lucide="moon-star" stroke-width="1" width="64" height="64"></i>
+        </div>
+        
+        <h1>Chá Revelação</h1>
+        <div class="hero-subtitle">Erika & Gabriel</div>
+        
+        <p class="hero-text">
+            Você é o nosso convidado especial para este chá revelação que vai celebrar a chegada do meu pacotinho de Deus. Conto com a sua presença!
+        </p>
+        
+        <a href="#rsvp" class="btn">Confirmar Presença</a>
+    </header>
+
+    <div class="divider"></div>
+
+    <!-- O Bebê Section -->
+    <section id="bebe">
+        <h2>Menino ou Menina?</h2>
+        
+        <div class="baby-grid">
+            <div class="card baby-card">
+                <div class="icon-wrapper">
+                    <!-- Ícone masculino suave e neutro -->
+                    <i data-lucide="star" stroke-width="1.5" width="40" height="40"></i>
+                </div>
+                <h3>João Gabriel</h3>
+            </div>
+            
+            <div class="card baby-card">
+                <div class="icon-wrapper">
+                    <!-- Ícone feminino suave e neutro -->
+                    <i data-lucide="heart" stroke-width="1.5" width="40" height="40"></i>
+                </div>
+                <h3>Maria Clara</h3>
+            </div>
+        </div>
+        
+        <p class="baby-footer">Em breve a grande revelação! Seja qual for, já é muito amado.</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Detalhes Section -->
+    <section id="detalhes">
+        <h2>Detalhes do Evento</h2>
+        
+        <div class="details-grid">
+            <div class="card detail-card">
+                <i data-lucide="calendar-days" class="icon" stroke-width="1.5" width="32" height="32"></i>
+                <div>
+                    <h3>Data</h3>
+                    <p class="highlight-text">[INSERIR DATA]</p>
+                </div>
+            </div>
+            
+            <div class="card detail-card">
+                <i data-lucide="clock" class="icon" stroke-width="1.5" width="32" height="32"></i>
+                <div>
+                    <h3>Horário</h3>
+                    <p class="highlight-text">[INSERIR HORÁRIO]</p>
+                </div>
+            </div>
+            
+            <div class="card detail-card">
+                <i data-lucide="map-pin" class="icon" stroke-width="1.5" width="32" height="32"></i>
+                <div>
+                    <h3>Local</h3>
+                    <p class="highlight-text">[INSERIR LOCAL]</p>
+                </div>
+            </div>
+            
+            <div class="card detail-card">
+                <i data-lucide="shirt" class="icon" stroke-width="1.5" width="32" height="32"></i>
+                <div>
+                    <h3>Dress Code</h3>
+                    <p>Tons neutros — bege, off-white, creme</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Formulário Section -->
+    <section id="rsvp">
+        <div class="form-container">
+            <h2>Confirme sua Presença</h2>
+            <p class="form-subtitle">Sua presença fará este momento ainda mais especial 🤍</p>
+            
+            <form id="rsvpForm">
+                <div class="form-group">
+                    <label for="nome">Nome Completo</label>
+                    <input type="text" id="nome" class="form-control" required placeholder="Digite seu nome">
+                </div>
+                
+                <div class="form-group">
+                    <label for="telefone">Telefone / WhatsApp</label>
+                    <input type="tel" id="telefone" class="form-control" required placeholder="(11) 99999-9999" maxlength="15">
+                </div>
+                
+                <div class="form-group">
+                    <label>Vai comparecer?</label>
+                    <div class="chips-group">
+                        <label class="chip-label">
+                            <input type="radio" name="presenca" value="sim" class="chip-input" required>
+                            <span class="chip-content">✅ Sim, estarei lá!</span>
+                        </label>
+                        
+                        <label class="chip-label">
+                            <input type="radio" name="presenca" value="nao" class="chip-input">
+                            <span class="chip-content">❌ Não poderei comparecer</span>
+                        </label>
+                        
+                        <label class="chip-label">
+                            <input type="radio" name="presenca" value="talvez" class="chip-input">
+                            <span class="chip-content">🤔 Talvez</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn submit-btn">Confirmar Presença</button>
+            </form>
+            
+            <div id="successMessage" class="success-message">
+                Obrigada pela confirmação! Mal podemos esperar para compartilhar este momento com você. 🤍
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        Com amor, Erika & Gabriel 🤍 <br>
+        <span id="year"></span>
+    </footer>
+
+    <!-- Scripts de Interação -->
+    <script>
+        // 1. Inicializar ícones Lucide
+        lucide.createIcons();
+
+        // 2. Máscara de Telefone (11) 99999-9999
+        const telefoneInput = document.getElementById('telefone');
+        telefoneInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 11) value = value.slice(0, 11); // Limite de 11 dígitos
+            
+            if (value.length > 2) {
+                value = `(${value.slice(0,2)}) ${value.slice(2)}`;
+            }
+            if (value.length > 10) {
+                value = `${value.slice(0,10)}-${value.slice(10)}`;
+            }
+            e.target.value = value;
+        });
+
+        // 3. Processamento do Formulário (Salvar no LocalStorage)
+        const form = document.getElementById('rsvpForm');
+        const successMessage = document.getElementById('successMessage');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nome = document.getElementById('nome').value;
+            const telefone = document.getElementById('telefone').value;
+            const presenca = document.querySelector('input[name="presenca"]:checked').value;
+            
+            const resposta = {
+                nome,
+                telefone,
+                presenca,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Lógica do localStorage
+            const key = 'chaRevelacaoRespostas';
+            let respostasSalvas = [];
+            
+            try {
+                const item = localStorage.getItem(key);
+                if (item) respostasSalvas = JSON.parse(item);
+            } catch(err) {
+                console.error("Erro ao ler respostas", err);
+            }
+            
+            respostasSalvas.push(resposta);
+            localStorage.setItem(key, JSON.stringify(respostasSalvas));
+            
+            // Animação de sucesso (UI Update) sem reload
+            form.style.display = 'none';
+            successMessage.style.display = 'block';
+        });
+
+        // 4. Smooth Scroll para os links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 5. Intersection Observer para Animação de Fade-In ao rolar a página
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Desobserva após aparecer
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // 6. Decorações sutis de fundo (Estrelas)
+        const decorationsContainer = document.getElementById('decorations');
+        const numStars = window.innerWidth > 768 ? 15 : 8; // Menos estrelas no mobile para performance
+        
+        for(let i = 0; i < numStars; i++) {
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('width', '16');
+            svg.setAttribute('height', '16');
+            svg.setAttribute('viewBox', '0 0 24 24');
+            svg.setAttribute('fill', 'none');
+            svg.setAttribute('stroke', 'currentColor');
+            svg.setAttribute('stroke-width', '1');
+            svg.setAttribute('stroke-linecap', 'round');
+            svg.setAttribute('stroke-linejoin', 'round');
+            
+            // Path da estrela do Lucide
+            svg.innerHTML = '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>';
+            
+            svg.style.left = `${Math.random() * 100}%`;
+            svg.style.top = `${Math.random() * 100}%`;
+            svg.style.transform = `scale(${Math.random() * 0.5 + 0.5})`; // Tamanhos variados
+            
+            decorationsContainer.appendChild(svg);
+        }
+
+        // 7. Configurar ano atual no footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
