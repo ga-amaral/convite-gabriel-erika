@@ -1,7 +1,7 @@
 /*
  * Autoria: [Gabriel Amaral](https://instagram.com/sougabrielamaral)
- * Versão: v1.3.1
- * Data/Hora: 2026-05-23T14:22:50-03:00
+ * Versão: v1.3.2
+ * Data/Hora: 2026-05-23T14:52:48-03:00
  */
 
 // Inicializa comportamentos da página
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Enviar os dados para o webhook do n8n (ambiente de teste)
-        fetch('https://n8n.globalportfolio.com.br/webhook-test/convite-gabriel-erika', {
+        fetch('https://n8n.globalportfolio.com.br/webhook/convite-gabriel-erika', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
