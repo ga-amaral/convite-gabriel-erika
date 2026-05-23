@@ -1,0 +1,420 @@
+/*
+ * Autoria: [Gabriel Amaral](https://instagram.com/sougabrielamaral)
+ * Versão: v1.1.0
+ * Data/Hora: 2026-05-23T11:45:58-03:00
+ */
+
+/* CSS Variables - Paleta Neutra e Acolhedora */
+:root {
+  --color-bg: #F7F3EE;
+  --color-surface: #EFE7DD;
+  --color-border: #D9CCBE;
+  --color-text-main: #5C5148;
+  --color-text-sec: #8A7D72;
+  --color-accent: #C8AE8D;
+  --color-accent-dark: #B89A79;
+  --color-white-cream: #FDFAF7;
+
+  --color-card-1: #F0E8DE;
+  --color-card-2: #EBE0D2;
+  --color-card-3: #E4D8CA;
+
+  --font-title: 'Cormorant Garamond', serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+
+  --shadow-soft: 0 8px 24px rgba(92, 81, 72, 0.08);
+  --shadow-hover: 0 16px 32px rgba(92, 81, 72, 0.12);
+}
+
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text-main);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-title);
+  font-weight: 600;
+}
+
+p {
+  font-size: 16px;
+}
+
+/* Global classes */
+.section-padding {
+  padding: 100px 24px;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 16px 36px;
+  border-radius: 100px;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  outline: none;
+  text-align: center;
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  /* Imagem de fundo personalizada (salve a imagem na mesma pasta como hero.jpg ou hero.png) */
+  background-image: url('./hero.png');
+  background-size: cover;
+  background-position: center;
+  color: var(--color-white-cream);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.20);
+  /* Mais transparente */
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-subtitle {
+  font-family: var(--font-title);
+  font-size: 18px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-title {
+  font-size: clamp(48px, 6vw, 72px);
+  line-height: 1.1;
+  margin-bottom: 24px;
+  font-weight: 600;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.hero-desc {
+  font-size: clamp(16px, 2vw, 20px);
+  opacity: 0.95;
+  max-width: 600px;
+  margin-bottom: 40px;
+  font-weight: 300;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.btn-hero {
+  background: rgba(253, 250, 247, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--color-accent);
+  color: var(--color-text-main);
+  background-color: rgba(253, 250, 247, 0.7);
+}
+
+.btn-hero:hover {
+  background-color: rgba(253, 250, 247, 0.9);
+  color: var(--color-text-main);
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  animation: pulse 2s infinite;
+  color: var(--color-white-cream);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0.8;
+}
+
+.scroll-indicator svg {
+  width: 24px;
+  height: 24px;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, 0);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: translate(-50%, 10px);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(-50%, 0);
+    opacity: 0.5;
+  }
+}
+
+/* Details Section */
+.details {
+  background-color: var(--color-white-cream);
+  text-align: center;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+@media (min-width: 768px) {
+  .cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.detail-card {
+  padding: 40px 24px;
+  border-radius: 24px;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.detail-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+}
+
+.card-1 {
+  background-color: var(--color-card-1);
+}
+
+.card-2 {
+  background-color: var(--color-card-2);
+}
+
+.card-3 {
+  background-color: var(--color-card-3);
+}
+
+.card-icon {
+  font-size: 40px;
+  margin-bottom: 16px;
+}
+
+.card-label {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  color: var(--color-text-sec);
+}
+
+.card-value {
+  font-family: var(--font-title);
+  font-size: 28px;
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark));
+  color: var(--color-white-cream);
+  box-shadow: var(--shadow-soft);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+  filter: brightness(0.95);
+}
+
+/* RSVP Section */
+.rsvp {
+  background: linear-gradient(135deg, #F0EBE3, #EDE4D8);
+  display: flex;
+  justify-content: center;
+}
+
+.rsvp-card {
+  background-color: var(--color-white-cream);
+  border-radius: 24px;
+  padding: 48px 24px;
+  box-shadow: var(--shadow-soft);
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .rsvp-card {
+    padding: 64px 48px;
+  }
+}
+
+.rsvp-title {
+  font-size: clamp(36px, 4vw, 48px);
+  margin-bottom: 12px;
+  color: var(--color-text-main);
+}
+
+.rsvp-subtitle {
+  color: var(--color-text-sec);
+  margin-bottom: 40px;
+}
+
+.form-group {
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--color-text-main);
+}
+
+.form-control {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg);
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--color-text-main);
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.form-control:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(200, 174, 141, 0.2);
+}
+
+select.form-control {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%235C5148' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 16px;
+}
+
+.btn-submit {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.success-msg {
+  display: none;
+  margin-top: 24px;
+  padding: 24px;
+  border-radius: 12px;
+  background-color: var(--color-card-1);
+  color: var(--color-text-main);
+  border: 1px solid var(--color-border);
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Footer */
+.footer {
+  background-color: var(--color-surface);
+  text-align: center;
+  padding: 40px 24px;
+  color: var(--color-text-sec);
+  font-size: 14px;
+}
+
+.footer-names {
+  font-family: var(--font-title);
+  font-size: 24px;
+  margin-bottom: 8px;
+  color: var(--color-text-main);
+}
+
+.footer-credits {
+  margin-top: 24px;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.footer-credits a {
+  color: inherit;
+  text-decoration: underline;
+}
