@@ -1,7 +1,7 @@
 /*
  * Autoria: [Gabriel Amaral](https://instagram.com/sougabrielamaral)
- * Versão: v1.3.2
- * Data/Hora: 2026-05-23T14:52:48-03:00
+ * Versão: v1.3.3
+ * Data/Hora: 2026-05-23T15:19:55-03:00
  */
 
 // Inicializa comportamentos da página
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Enviar os dados para o webhook do n8n (ambiente de teste)
-        fetch('https://n8n.globalportfolio.com.br/webhook/convite-gabriel-erika', {
+        fetch('https://n8n.globalportfolio.com.br/webhook-test/convite-gabriel-erika', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -133,6 +133,18 @@ document.addEventListener('DOMContentLoaded', () => {
           console.error('[RSVP Webhook Connection Error]:', err);
         })
         .finally(() => {
+          // Exibir mensagem de sucesso dependendo da escolha de presença
+          const msgYesMaybe = document.getElementById('msgYesMaybe');
+          const msgNo = document.getElementById('msgNo');
+
+          if (presenca === 'Nao') {
+            if (msgYesMaybe) msgYesMaybe.style.display = 'none';
+            if (msgNo) msgNo.style.display = 'block';
+          } else {
+            if (msgYesMaybe) msgYesMaybe.style.display = 'block';
+            if (msgNo) msgNo.style.display = 'none';
+          }
+
           // Exibir mensagem de sucesso independente do webhook para garantir fluxo do usuário
           form.style.display = 'none';
           if (successMessage) {
