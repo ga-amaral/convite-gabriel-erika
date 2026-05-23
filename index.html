@@ -18,10 +18,10 @@
     rel="stylesheet">
 
   <!-- Estilos Externos (Com técnica de Cache Busting) -->
-  <link rel="stylesheet" href="style.css?v=1.1.1">
+  <link rel="stylesheet" href="style.css?v=1.2.0">
 
   <!-- Autoria e Controle de Versão -->
-  <!-- Desenvolvido por [Gabriel Amaral](https://instagram.com/sougabrielamaral) | Versão: v1.1.1 | Data/Hora: 2026-05-23T11:52:22-03:00 -->
+  <!-- Desenvolvido por [Gabriel Amaral](https://instagram.com/sougabrielamaral) | Versão: v1.2.0 | Data/Hora: 2026-05-23T11:54:05-03:00 -->
 </head>
 
 <body>
@@ -34,7 +34,28 @@
         <h1 class="hero-title">Um bebê está a caminho e a curiosidade está no ar! 🤍</h1>
         <p class="hero-desc">Você é o nosso convidado especial para celebrar a chegada do nosso pacotinho de Deus. Em
           breve descobriremos juntos se é o João Gabriel ou a Maria Clara. Conto com a sua presença!</p>
-        <a href="#detalhes" class="btn btn-hero">O momento chegou! 🤍</a>
+        <!-- Contagem Regressiva -->
+        <div class="countdown-container" id="countdown">
+          <div class="countdown-item">
+            <span class="countdown-value" id="days">00</span>
+            <span class="countdown-label">Dias</span>
+          </div>
+          <span class="countdown-divider">:</span>
+          <div class="countdown-item">
+            <span class="countdown-value" id="hours">00</span>
+            <span class="countdown-label">Horas</span>
+          </div>
+          <span class="countdown-divider">:</span>
+          <div class="countdown-item">
+            <span class="countdown-value" id="minutes">00</span>
+            <span class="countdown-label">Min</span>
+          </div>
+          <span class="countdown-divider">:</span>
+          <div class="countdown-item">
+            <span class="countdown-value" id="seconds">00</span>
+            <span class="countdown-label">Seg</span>
+          </div>
+        </div>
       </div>
 
       <div class="scroll-indicator">
@@ -119,7 +140,7 @@
   </footer>
 
   <!-- Scripts Externos (Com técnica de Cache Busting) -->
-  <script src="script.js?v=1.1.1" defer></script>
+  <script src="script.js?v=1.2.0" defer></script>
 </body>
 
 </html>

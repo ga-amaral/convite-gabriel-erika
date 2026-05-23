@@ -1,7 +1,7 @@
 /*
  * Autoria: [Gabriel Amaral](https://instagram.com/sougabrielamaral)
- * Versão: v1.1.1
- * Data/Hora: 2026-05-23T11:52:22-03:00
+ * Versão: v1.2.0
+ * Data/Hora: 2026-05-23T11:54:05-03:00
  */
 
 // Inicializa comportamentos da página
@@ -11,6 +11,42 @@ document.addEventListener('DOMContentLoaded', () => {
   const currentYearEl = document.getElementById('currentYear');
   if (currentYearEl) {
     currentYearEl.textContent = new Date().getFullYear();
+  }
+
+  // Lógica da Contagem Regressiva para a data da festa (19/07 às 13:00)
+  const targetDate = new Date('2026-07-19T13:00:00');
+  
+  const daysEl = document.getElementById('days');
+  const hoursEl = document.getElementById('hours');
+  const minutesEl = document.getElementById('minutes');
+  const secondsEl = document.getElementById('seconds');
+
+  function updateCountdown() {
+    const now = new Date();
+    const difference = targetDate - now;
+
+    if (difference <= 0) {
+      if (daysEl) daysEl.textContent = '00';
+      if (hoursEl) hoursEl.textContent = '00';
+      if (minutesEl) minutesEl.textContent = '00';
+      if (secondsEl) secondsEl.textContent = '00';
+      return;
+    }
+
+    const d = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    const s = Math.floor((difference % (1000 * 60)) / 1000);
+
+    if (daysEl) daysEl.textContent = String(d).padStart(2, '0');
+    if (hoursEl) hoursEl.textContent = String(h).padStart(2, '0');
+    if (minutesEl) minutesEl.textContent = String(m).padStart(2, '0');
+    if (secondsEl) secondsEl.textContent = String(s).padStart(2, '0');
+  }
+
+  if (daysEl && hoursEl && minutesEl && secondsEl) {
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
   }
 
   // Intersection Observer para animações de fade-in (Otimização de Performance visual)
