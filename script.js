@@ -1,7 +1,7 @@
 /*
  * Autoria: [Gabriel Amaral](https://instagram.com/sougabrielamaral)
- * Versão: v1.2.2
- * Data/Hora: 2026-05-23T11:58:37-03:00
+ * Versão: v1.3.0
+ * Data/Hora: 2026-05-23T12:18:39-03:00
  */
 
 // Inicializa comportamentos da página
@@ -81,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Tratamento de submissão do formulário RSVP
   const form = document.getElementById('rsvpForm');
   const successMessage = document.getElementById('successMessage');
+  const submitBtn = form ? form.querySelector('button[type="submit"]') : null;
 
   if (form) {
     form.addEventListener('submit', function (e) {
@@ -98,21 +99,46 @@ document.addEventListener('DOMContentLoaded', () => {
           timestamp: new Date().toISOString()
         };
 
-        // Tratamento de erro simulado (fallback try catch) e salvamento via localStorage
+        // Desabilita o botão para evitar múltiplos cliques
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Enviando...';
+        }
+
+        // Salvar localmente em localStorage como fallback de segurança
         try {
           let respostas = JSON.parse(localStorage.getItem('chaRevelacaoRespostas') || '[]');
           respostas.push(resposta);
           localStorage.setItem('chaRevelacaoRespostas', JSON.stringify(respostas));
+        } catch (err) {
+          console.error('Erro ao salvar no localStorage:', err);
+        }
 
-          // Feedback Visual
+        // Enviar os dados para o webhook do n8n
+        fetch('https://n8n.globalportfolio.com.br/webhook/convite-gabriel-erika', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(resposta)
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Erro na resposta do webhook');
+          }
+          return response;
+        })
+        .catch(err => {
+          // Log detalhado para identificar o erro de forma autônoma
+          console.error('[RSVP Webhook Connection Error]:', err);
+        })
+        .finally(() => {
+          // Exibir mensagem de sucesso independente do webhook para garantir fluxo do usuário
           form.style.display = 'none';
           if (successMessage) {
             successMessage.style.display = 'block';
           }
-        } catch (err) {
-          console.error('Erro ao salvar no localStorage:', err);
-          alert('Ocorreu um erro ao salvar sua confirmação. Por favor, tente novamente.');
-        }
+        });
       }
     });
   }
