@@ -1,7 +1,7 @@
 /*
  * Autoria: [Gabriel Amaral](https://instagram.com/sougabrielamaral)
- * Versão: v1.1.0
- * Data/Hora: 2026-05-23T11:45:58-03:00
+ * Versão: v1.1.1
+ * Data/Hora: 2026-05-23T11:52:22-03:00
  */
 
 // Inicializa comportamentos da página
