@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Lógica da Contagem Regressiva para a data da festa (19/07 às 13:00)
-  const targetDate = new Date('2026-07-19T13:00:00');
+  const targetDate = new Date('2026-07-26T13:00:00');
   
   const daysEl = document.getElementById('days');
   const hoursEl = document.getElementById('hours');
